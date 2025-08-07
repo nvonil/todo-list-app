@@ -17,17 +17,22 @@
     --secondary-text: #9b9b9b;
 
     --primary-color: #6c63ff;
+    --primary-delete: #ef233c;
 }
 
 body {
     display: grid;
     place-content: center;
 
+    background-color: var(--primary-white);
+
     height: 100vh;
 }
 
 main {
     height: 90vh;
+
+    position: relative;
 }
 
 /* Header */
@@ -41,7 +46,7 @@ main {
 .header-title {
     color: var(--primary-text);
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
 
     text-align: center;
 }
@@ -54,42 +59,44 @@ main {
     align-items: center;
     gap: 1rem;
 
-    width: 750px;
+    width: 100%;
     height: 40px;
 }
 
-/* Input */
+/* Search */
 
-.input-container {
+.search-container {
     display: flex;
     align-items: center;
 
     border: 1px solid var(--primary-color);
     border-radius: 5px;
 
-    width: 500px;
+    width: 550px;
     height: 100%;
 }
 
-.input-container input {
+.search-container input {
     border: none;
 
+    background-color: var(--primary-white);
     color: var(--primary-color);
     outline: none;
 
-    /* fix the length of the input to take up the whole space without messing up the spacing of the search icon */
-    /* width: 100%; */
-    padding-right: 0.5rem;
+    margin-right: 0.75rem;
+
+    flex: 1;
 }
 
-.input-container input::placeholder {
+.search-container input::placeholder {
     color: var(--secondary-text);
 }
 
-.input-container svg {
+.search-container svg {
     color: var(--primary-color);
 
     margin: 0 0.75rem;
+    stroke-width: 1;
 }
 
 /* Filter */
@@ -108,14 +115,18 @@ main {
     width: 100px;
     height: 100%;
     padding: 0 1rem;
+
+    transition: all 0.3s;
 }
 
-.filter-text {
-    background-color: var(--primary-color);
+.filter-container:hover,
+.dark-mode-container:hover {
+    transform: scale(1.05);
+}
+
+.filter-container span {
     color: var(--primary-white);
     font-weight: 600;
-
-    border: none;
 }
 
 .filter-container svg {
@@ -136,8 +147,144 @@ main {
 
     display: grid;
     place-content: center;
+
+    transition: all 0.3s;
 }
 
 .dark-mode-container svg {
     color: var(--primary-white);
+}
+
+/* Todo */
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    list-style-type: none;
+
+    padding: 3rem 6rem;
+}
+
+/* Item */
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Item Content */
+
+.item-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.item-content input {
+    appearance: none;
+    background-color: var(--primary-white);
+    cursor: pointer;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+
+    width: 24px;
+    height: 24px;
+
+    position: relative;
+}
+
+.item-content input::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--primary-color);
+    opacity: 0;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 5px;
+
+    transition: all 0.3s;
+}
+
+.item-content input:checked::before {
+    transform: translate(-50%, -50%);
+
+    opacity: 1;
+}
+
+.item-content span {
+    color: var(--primary-text);
+    font-weight: 500;
+}
+
+/* Item Edit / Item Delete */
+
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    cursor: pointer;
+}
+
+.item-actions svg {
+    color: var(--secondary-text);
+
+    width: 20px;
+    height: 20px;
+    stroke-width: 1;
+
+    transition: all 0.3s;
+}
+
+.item-actions svg:hover {
+    transform: scale(1.05);
+}
+
+.item-actions svg:first-child:hover {
+    color: var(--primary-color);
+}
+
+.item-actions svg:last-child:hover {
+    color: var(--primary-delete);
+}
+
+/* Add Button */
+
+.add-button {
+    width: 50px;
+    height: 50px;
+
+    background-color: var(--primary-color);
+
+    border: none;
+    border-radius: 50%;
+
+    display: grid;
+    place-content: center;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    transition: all 0.3s;
+}
+
+.add-button:hover {
+    transform: scale(1.05);
+}
+
+.add-button svg {
+    color: var(--primary-white);
+
+    width: 34px;
+    height: 34px;
 }
