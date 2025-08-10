@@ -57,11 +57,8 @@ main {
 
 .controls-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
 
-    width: 100%;
     height: 40px;
 }
 
@@ -78,7 +75,7 @@ main {
     height: 100%;
 }
 
-.search-container input {
+.search-input {
     border: none;
 
     background-color: var(--primary-white);
@@ -90,7 +87,7 @@ main {
     flex: 1;
 }
 
-.search-container input::placeholder {
+.search-input::placeholder {
     color: var(--secondary-color);
 }
 
@@ -157,9 +154,9 @@ main {
     color: var(--primary-white);
 }
 
-/* Todo */
+/* Todos */
 
-.todo-container {
+.todos-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -181,11 +178,10 @@ main {
 
 .item-content {
     display: flex;
-    align-items: center;
     gap: 1rem;
 }
 
-.item-content input {
+.item-content input[type="checkbox"] {
     appearance: none;
     background-color: var(--primary-white);
     cursor: pointer;
@@ -199,7 +195,7 @@ main {
     position: relative;
 }
 
-.item-content input::before {
+.item-content input[type="checkbox"]::before {
     content: "";
     position: absolute;
     left: 50%;
@@ -217,9 +213,7 @@ main {
     transition: all 0.3s;
 }
 
-.item-content input:checked::before {
-    transform: translate(-50%, -50%);
-
+.item-content input[type="checkbox"]:checked::before {
     opacity: 1;
 }
 
@@ -230,22 +224,21 @@ main {
     transition: all 0.3s;
 }
 
-.item-content input:checked + span {
+.item-content input[type="checkbox"]:checked + span {
     color: var(--secondary-text);
     text-decoration: line-through;
 }
 
-/* Item Edit / Item Delete */
+/* Item Actions */
 
 .item-actions {
     display: flex;
     gap: 0.5rem;
-
-    cursor: pointer;
 }
 
 .item-actions svg {
     color: var(--secondary-text);
+    cursor: pointer;
 
     width: 20px;
     height: 20px;
@@ -258,11 +251,11 @@ main {
     transform: scale(1.05);
 }
 
-.item-actions svg:first-child:hover {
+.edit-button:hover {
     color: var(--primary-color);
 }
 
-.item-actions svg:last-child:hover {
+.delete-button:last-child:hover {
     color: var(--primary-delete);
 }
 
@@ -299,7 +292,7 @@ main {
     height: 34px;
 }
 
-/* Popup */
+/* Popup Background */
 
 .popup-wrapper {
     position: fixed;
@@ -320,6 +313,8 @@ main {
     pointer-events: auto;
 }
 
+/* Popup */
+
 .popup-container {
     width: 500px;
     padding: 1rem 2rem;
@@ -328,7 +323,7 @@ main {
     left: 50%;
     top: 25%;
     transform: translate(-50%, -25%) translateY(-150%);
-    z-index: 1;
+    z-index: 2;
 
     background-color: var(--primary-white);
     opacity: 0;
@@ -343,7 +338,7 @@ main {
 }
 
 .popup-container.visible {
-    transform: translate(-50%, -50%) translateY(0);
+    transform: translate(-50%, -25%) translateY(0);
     opacity: 1;
 }
 
@@ -362,19 +357,18 @@ main {
     text-align: center;
 }
 
-.popup-content input {
+.popup-input {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
 
     color: var(--primary-color);
-
     outline: none;
 
     height: 40px;
     padding: 0 0.75rem;
 }
 
-.popup-content input::placeholder {
+.popup-input::placeholder {
     color: var(--secondary-color);
 }
 
