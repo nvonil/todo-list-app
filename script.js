@@ -16,6 +16,7 @@ popupWrapper.addEventListener("click", function (e) {
 function openPopup() {
     popupWrapper.classList.add("visible");
     popupContainer.classList.add("visible");
+    popupInput.focus();
 }
 
 function closePopup() {
@@ -37,10 +38,16 @@ applyButton.addEventListener("click", function () {
         return;
     } else {
         itemsList.push(popupInputValue);
-        popupInputValue = "";
+        popupInput.value = "";
 
         closePopup();
         renderList();
+    }
+});
+
+popupInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        applyButton.click();
     }
 });
 
@@ -91,4 +98,31 @@ function renderList() {
                          </li>`;
     }
     todosContainer.innerHTML = renderedItems;
+}
+
+// Filter popup visibility logic
+
+const filterContainer = document.querySelector(".filter-container");
+const filterDropdown = document.querySelector(".filter-dropdown");
+
+filterContainer.addEventListener("click", function (e) {
+    e.stopPropagation(); // prevents event bubbling to parent listeners
+    openDropdown();
+});
+
+document.addEventListener("click", function () {
+    // counts clicks everywhere, including the filter container
+    if (filterDropdown.classList.contains("open")) {
+        closeDropdown();
+    }
+});
+
+function openDropdown() {
+    filterContainer.classList.toggle("open");
+    filterDropdown.classList.toggle("open");
+}
+
+function closeDropdown() {
+    filterContainer.classList.remove("open");
+    filterDropdown.classList.remove("open");
 }
