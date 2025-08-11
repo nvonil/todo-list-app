@@ -101,6 +101,8 @@ main {
 /* Filter */
 
 .filter-container {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,6 +125,10 @@ main {
     transform: scale(1.05);
 }
 
+.filter-container.open:hover {
+    transform: none;
+}
+
 .filter-container span {
     color: var(--primary-white);
     font-weight: 600;
@@ -130,6 +136,53 @@ main {
 
 .filter-container svg {
     color: var(--primary-white);
+}
+
+.dropdown-up {
+    display: none;
+}
+
+.filter-container.open .dropdown-down {
+    display: none;
+}
+
+.filter-container.open .dropdown-up {
+    display: block;
+}
+
+/* Filter Dropdown */
+
+.filter-dropdown {
+    display: none;
+
+    position: absolute;
+    left: 0;
+    top: 100%;
+
+    background-color: var(--primary-white);
+
+    width: 100%;
+    margin-top: 0.5rem;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+.filter-dropdown.open {
+    display: block;
+}
+
+.dropdown-options {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+
+    padding: 0.5rem;
+
+    transition: all 0.3s;
+}
+
+.dropdown-options:hover {
+    background-color: var(--secondary-color);
 }
 
 /* Dark Mode */
@@ -402,14 +455,13 @@ main {
 }
 
 .cancel-button:hover {
-    border: 1px solid var(--primary-delete);
-
-    color: var(--primary-delete);
+    background-color: var(--primary-color);
+    color: var(--primary-white);
 }
 
 .apply-button {
     background-color: var(--primary-color);
     color: var(--primary-white);
 
-    border: none;
+    border: 1px solid transparent;
 }
