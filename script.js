@@ -89,6 +89,7 @@ function renderList() {
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     class="lucide lucide-trash-icon lucide-trash delete-button"
+                                    data-index="${i}"
                                 >
                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
                                     <path d="M3 6h18" />
@@ -125,4 +126,46 @@ function openDropdown() {
 function closeDropdown() {
     filterContainer.classList.remove("open");
     filterDropdown.classList.remove("open");
+}
+
+// Individual item deletion logic / Individual item edit logic
+
+todosContainer.addEventListener("click", function (e) {
+    const deleteButton = e.target.closest(".delete-button");
+    if (deleteButton) {
+        const index = deleteButton.dataset.index;
+        deleteItem(index);
+    }
+
+    const editButton = e.target.closest(".edit-button");
+    if (editButton) {
+        const todoItem = editButton.closest(".todo-item");
+        const span = todoItem.querySelector(".item-content span");
+        const index = Array.from(todosContainer.children).indexOf(todoItem);
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = span.textContent;
+        input.classList.add("edit-input");
+
+        span.replaceWith(input);
+        input.focus();
+
+        input.addEventListener("blur", saveEdit);
+        input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                saveEdit();
+            }
+        });
+
+        function saveEdit() {
+            itemsList[index] = input.value.trim();
+            renderList();
+        }
+    }
+});
+
+function deleteItem(index) {
+    itemsList.splice(index, 1);
+    renderList();
 }
