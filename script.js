@@ -9,6 +9,7 @@ addButton.addEventListener("click", openPopup);
 cancelButton.addEventListener("click", closePopup);
 popupWrapper.addEventListener("click", function (e) {
     if (e.target === popupWrapper) {
+        popupInput.value = "";
         closePopup();
     }
 });
@@ -131,39 +132,42 @@ function closeDropdown() {
 // Individual item deletion logic / Individual item edit logic
 
 todosContainer.addEventListener("click", function (e) {
-    const deleteButton = e.target.closest(".delete-button");
-    if (deleteButton) {
-        const index = deleteButton.dataset.index;
-        deleteItem(index);
-    }
-
     const editButton = e.target.closest(".edit-button");
     if (editButton) {
         const todoItem = editButton.closest(".todo-item");
-        const span = todoItem.querySelector(".item-content span");
-        const index = Array.from(todosContainer.children).indexOf(todoItem);
+        const itemContentSpan = todoItem.querySelector(".item-content span");
+        const itemIndex = Array.from(todosContainer.children).indexOf(todoItem);
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.value = span.textContent;
-        input.classList.add("edit-input");
+        const editInput = document.createElement("input");
+        editInput.type = "text";
+        editInput.value = span.textContent;
+        editInput.classList.add("edit-input");
 
-        span.replaceWith(input);
-        input.focus();
+        itemContentSpan.replaceWith(input);
+        editInput.focus();
 
-        input.addEventListener("blur", saveEdit);
-        input.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") {
-                saveEdit();
-            }
+        editInput.addEventListener("blur", function () {
+            saveEdit(editInput, itemIndex);
         });
 
-        function saveEdit() {
-            itemsList[index] = input.value.trim();
-            renderList();
-        }
+        editButton.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                saveEdit(editInput, itemIndex);
+            }
+        });
+    }
+
+    const deleteButton = e.target.closest(".delete-button");
+    if (deleteButton) {
+        const itemIndex = deleteButton.dataset.index;
+        deleteItem(itemIndex);
     }
 });
+
+function saveEdit(input, index) {
+    itemsList[index] = input.value.trim();
+    renderList();
+}
 
 function deleteItem(index) {
     itemsList.splice(index, 1);
