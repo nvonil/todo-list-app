@@ -38,7 +38,8 @@ applyButton.addEventListener("click", function () {
     if (popupInputValue === "") {
         return;
     } else {
-        itemsList.push(popupInputValue);
+        // itemsList.push(popupInputValue);
+        itemsList.push({ text: popupInputValue, completed: false });
         popupInput.value = "";
 
         closePopup();
@@ -53,12 +54,27 @@ popupInput.addEventListener("keydown", function (e) {
 });
 
 function renderList() {
+    let filteredItems = itemsList.filter((item) => {
+        if (currentFilter === "Complete") {
+            return item.completed;
+        }
+
+        if (currentFilter === "Incomplete") {
+            return !item.completed;
+        }
+
+        return true;
+    });
+
     let renderedItems = "";
-    for (let i = 0; i < itemsList.length; i++) {
+    for (let i = 0; i < filteredItems.length; i++) {
+        let item = filteredItems[i];
         renderedItems += `<li class="todo-item">
                             <div class="item-content">
-                                <input type="checkbox" />
-                                <span>${itemsList[i]}</span>
+                                <input type="checkbox" data-index="${itemsList.indexOf(item)}" ${
+            item.completed ? "checked" : ""
+        } />
+                                <span>${item.text}</span>
                             </div>
 
                             <div class="item-actions">
@@ -112,6 +128,19 @@ filterContainer.addEventListener("click", function (e) {
     openDropdown();
 });
 
+currentFilter = "All";
+
+filterDropdown.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (e.target.classList.contains("dropdown-options")) {
+        currentFilter = e.target.textContent;
+        filterContainer.querySelector("span").textContent = currentFilter.toUpperCase();
+
+        closeDropdown();
+        renderList();
+    }
+});
+
 document.addEventListener("click", function () {
     // counts clicks everywhere, including the filter container
     if (filterDropdown.classList.contains("open")) {
@@ -129,9 +158,16 @@ function closeDropdown() {
     filterDropdown.classList.remove("open");
 }
 
-// Individual item deletion logic / Individual item edit logic
+// Item filter, edit, deletion
 
 todosContainer.addEventListener("click", function (e) {
+    const checkbox = e.target.closest("input[type='checkbox']");
+    if (checkbox) {
+        const itemIndex = checkbox.dataset.index;
+        itemsList[itemIndex].completed = checkbox.checked;
+        renderList();
+    }
+
     const editButton = e.target.closest(".edit-button");
     if (editButton) {
         const todoItem = editButton.closest(".todo-item");
@@ -165,7 +201,7 @@ todosContainer.addEventListener("click", function (e) {
 });
 
 function saveEdit(input, index) {
-    itemsList[index] = input.value.trim();
+    itemsList[index].text = input.value.trim();
     renderList();
 }
 
