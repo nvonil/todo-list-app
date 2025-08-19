@@ -182,6 +182,10 @@ main {
 }
 
 .dropdown-options:hover {
+    background-color: rgba(170, 190, 190, 0.5);
+}
+
+.dropdown-options.active {
     background-color: var(--secondary-color);
 }
 
