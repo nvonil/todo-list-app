@@ -118,6 +118,20 @@ function renderList() {
     todosContainer.innerHTML = renderedItems;
 }
 
+const dropdownOptions = document.querySelectorAll(".dropdown-options");
+
+function setActiveOption(selectedText) {
+    dropdownOptions.forEach((option) => {
+        if (option.textContent === selectedText) {
+            option.classList.add("active");
+        } else {
+            option.classList.remove("active");
+        }
+    });
+}
+
+setActiveOption("All");
+
 // Filter popup visibility logic
 
 const filterContainer = document.querySelector(".filter-container");
@@ -136,6 +150,7 @@ filterDropdown.addEventListener("click", function (e) {
         currentFilter = e.target.textContent;
         filterContainer.querySelector("span").textContent = currentFilter.toUpperCase();
 
+        setActiveOption(currentFilter);
         closeDropdown();
         renderList();
     }
