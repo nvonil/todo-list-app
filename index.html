@@ -9,7 +9,7 @@
     </head>
     <body>
         <main>
-            <header class="header-container">
+            <header>
                 <div class="header-title">TODO LIST</div>
 
                 <div class="controls-container">
@@ -21,7 +21,7 @@
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="2"
+                            stroke-width="1"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             class="lucide lucide-search-icon lucide-search"
@@ -32,7 +32,7 @@
                         <input type="text" class="search-input" placeholder="Search item..." />
                     </div>
 
-                    <div class="filter-container">
+                    <button class="filter-button">
                         <span>ALL</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="lucide lucide-chevron-down-icon lucide-chevron-down dropdown-down"
+                            class="lucide lucide-chevron-down-icon lucide-chevron-down filter-down-arrow"
                         >
                             <path d="m6 9 6 6 6-6" />
                         </svg>
@@ -58,60 +58,42 @@
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="lucide lucide-chevron-up-icon lucide-chevron-up dropdown-up"
+                            class="lucide lucide-chevron-up-icon lucide-chevron-up filter-up-arrow"
                         >
                             <path d="m18 15-6-6-6 6" />
                         </svg>
                         <div class="filter-dropdown">
-                            <div class="dropdown-options">All</div>
+                            <div class="dropdown-options active">All</div>
                             <div class="dropdown-options">Complete</div>
                             <div class="dropdown-options">Incomplete</div>
                         </div>
-                    </div>
-
-                    <div class="dark-mode-container">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-moon-icon lucide-moon"
-                        >
-                            <path
-                                d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"
-                            />
-                        </svg>
-                    </div>
+                    </button>
                 </div>
+
+                <button class="add-button">
+                    <span>NEW ITEM</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-plus-icon lucide-plus"
+                    >
+                        <path d="M5 12h14" />
+                        <path d="M12 5v14" />
+                    </svg>
+                </button>
             </header>
 
             <ul class="todos-container"></ul>
-
-            <button class="add-button">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-plus-icon lucide-plus"
-                >
-                    <path d="M5 12h14" />
-                    <path d="M12 5v14" />
-                </svg>
-            </button>
         </main>
 
-        <div class="popup-wrapper">
+        <div class="popup-background">
             <div class="popup-container">
                 <div class="popup-content">
                     <div class="popup-title">NEW ITEM</div>
@@ -124,6 +106,7 @@
                 </div>
             </div>
         </div>
+
         <script src="script.js"></script>
     </body>
 </html>
