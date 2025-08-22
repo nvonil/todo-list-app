@@ -313,6 +313,13 @@ header {
     border: none;
 }
 
+.item-content span,
+.edit-input {
+    width: 450px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* Item Actions */
 
 .item-actions {
