@@ -1,4 +1,4 @@
-// Toggle popup popup visibility and focus inpur
+// Toggle popup visibility and focus input
 
 const addButton = document.querySelector(".add-button");
 const cancelButton = document.querySelector(".cancel-button");
@@ -30,7 +30,6 @@ function closePopup() {
 
 const popupInput = document.querySelector(".popup-input");
 const applyButton = document.querySelector(".apply-button");
-const todosContainer = document.querySelector(".todos-container");
 
 const itemsList = [];
 
@@ -71,9 +70,10 @@ filterDropdown.addEventListener("click", function (e) {
     e.stopPropagation();
     if (e.target.classList.contains("dropdown-options")) {
         currentFilter = e.target.textContent;
+        setActiveOption(currentFilter);
+
         filterButtonSpan.textContent = currentFilter.toUpperCase();
 
-        setActiveOption(currentFilter);
         closeDropdown();
         renderList();
     }
@@ -106,6 +106,8 @@ function setActiveOption(activeFilter) {
 }
 
 // Handle marking complete, editing, and deleting todos
+
+const todosContainer = document.querySelector(".todos-container");
 
 todosContainer.addEventListener("click", function (e) {
     const itemCheckbox = e.target.closest(".item-checkbox");
