@@ -5,8 +5,8 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-size: 1rem;
     font-family: "Poppins", sans-serif;
+    font-size: 1rem;
     font-weight: 400;
 }
 
@@ -48,7 +48,6 @@ header {
     color: var(--primary-text);
     font-size: 1.5rem;
     font-weight: 500;
-
     text-align: center;
 }
 
@@ -113,15 +112,11 @@ header {
     width: 175px;
     padding: 0 1rem;
 
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 
 .filter-button:hover {
     transform: scale(1.05);
-}
-
-.filter-button.open:hover {
-    transform: none;
 }
 
 .filter-button span {
@@ -137,11 +132,15 @@ header {
     display: none;
 }
 
-.filter-container.open .filter-down-arrow {
+.filter-button.open:hover {
+    transform: none;
+}
+
+.filter-button.open .filter-down-arrow {
     display: none;
 }
 
-.filter-container.open .filter-up-arrow {
+.filter-button.open .filter-up-arrow {
     display: block;
 }
 
@@ -175,7 +174,7 @@ header {
 
     padding: 0.5rem;
 
-    transition: all 0.3s;
+    transition: background-color 0.3s;
 }
 
 .dropdown-options:hover {
@@ -203,7 +202,7 @@ header {
     align-items: center;
     gap: 1rem;
 
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 
 .add-button:hover {
@@ -225,8 +224,6 @@ header {
     display: flex;
     flex-direction: column;
 
-    list-style-type: none;
-
     padding: 2rem 4rem;
 }
 
@@ -241,8 +238,8 @@ header {
 .todo-item:not(:last-child) {
     border-bottom: 1px solid var(--primary-color);
 
-    padding-bottom: 1.5rem;
     margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .todo-item:hover .item-actions svg {
@@ -285,7 +282,7 @@ header {
 
     border-radius: 5px;
 
-    transition: all 0.3s;
+    transition: opacity 0.3s;
 }
 
 .item-checkbox:checked::before {
@@ -296,7 +293,7 @@ header {
     color: var(--primary-text);
     font-weight: 500;
 
-    transition: all 0.3s;
+    transition: color 0.3s;
 }
 
 .item-checkbox:checked + span {
@@ -316,6 +313,7 @@ header {
 .item-content span,
 .edit-input {
     width: 450px;
+
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -335,7 +333,7 @@ header {
     width: 18px;
     height: 18px;
 
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 
 .item-actions svg:hover {
@@ -363,7 +361,7 @@ header {
     opacity: 0;
     pointer-events: none;
 
-    transition: all 0.3s;
+    transition: opacity 0.3s;
 }
 
 .popup-background.open {
@@ -392,7 +390,7 @@ header {
 
     border-radius: 1rem;
 
-    transition: all 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .popup-container.open {
@@ -447,7 +445,7 @@ header {
     cursor: pointer;
     font-weight: 600;
 
-    transition: all 0.3s;
+    transition: transform 0.3s;
 }
 
 .popup-actions button:hover {
